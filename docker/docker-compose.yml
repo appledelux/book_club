@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  php-apache:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ../src:/var/www/html
+    restart: always
+    working_dir: /var/www/html
