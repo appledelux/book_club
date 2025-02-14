@@ -1,6 +1,9 @@
 # Usa la imagen oficial de PHP con Apache
 FROM php:8.1-apache
 
+# Instala extensiones necesarias para PDO MySQL
+RUN docker-php-ext-install pdo pdo_mysql
+
 # Configurar la zona horaria
 RUN echo "Europe/Madrid" > /etc/timezone
 

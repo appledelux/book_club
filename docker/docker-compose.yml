@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   php-apache:
+    container_name: php-apache
     build:
       context: ..
       dockerfile: Dockerfile
@@ -11,3 +12,40 @@ services:
       - ../src:/var/www/html
     restart: always
     working_dir: /var/www/html
+    depends_on:
+      - db
+    networks:
+      - book_club_network
+  db:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: book_club
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
+    networks:
+      - book_club_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8082:80"
+    depends_on:
+      - db
+    networks:
+      - book_club_network
+
+volumes: 
+  db_data:
+networks:
+  book_club_network:
+    driver: bridge

@@ -1,6 +1,6 @@
 <?php
-require_once "../config.php";
-$file = '../data/contacts.json';
+require_once __DIR__ . "/../config.php";
+$file = __DIR__ . '/../data/contacts.json';
 $contacts = [];
 
 if (file_exists($file)) {

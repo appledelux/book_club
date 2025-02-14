@@ -1,7 +1,7 @@
 <script>
     function addContact(event) {
         event.preventDefault();
-        const SAVE_CONTACT = "<?php echo SAVE_CONTACT; ?>";
+        const SAVE_CONTACT = "<?php echo __DIR__ . '/../contacts/save_contact.php'; ?>";
 
         let formData = new FormData(document.getElementById("contactForm"));
 
