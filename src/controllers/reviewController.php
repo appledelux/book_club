@@ -15,7 +15,7 @@ class Review
 
     public function findAll()
     {
-        $query = "SELECT reviews.comment, reviews.date, users.username as user, books.title AS book_title 
+        $query = "SELECT reviews.id, reviews.comment, reviews.date, users.username as user, books.title AS book_title 
                   FROM " . $this->table_name . " 
                   JOIN users ON reviews.id_user = users.id 
                   JOIN books ON reviews.id_book = books.id 
