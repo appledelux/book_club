@@ -20,7 +20,9 @@ $books = $bookInstance->findAll();
                 <th>Autor</th>
                 <th>Género</th>
                 <th>Año Publicación</th>
-                <th>Acciones</th>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <th>Acciones</th>
+                <?php endif; ?>
             </tr>
         </thead>
         <tbody id="booksTableBody">
@@ -31,16 +33,18 @@ $books = $bookInstance->findAll();
                         <td><?php echo htmlspecialchars(string: $book['author']); ?></td>
                         <td><?php echo htmlspecialchars(string: $book['book_genre']); ?></td>
                         <td><?php echo htmlspecialchars(string: $book['year_published']); ?></td>
-                        <td>
-                            <button class="btn edit-btn" onclick="showSection('createBook'), editBook(
+                        <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                            <td>
+                                <button class="btn edit-btn" onclick="showSection('createBook'), editBook(
                                 <?php echo $book['id']; ?>,
                                 '<?php echo htmlspecialchars($book['title']); ?>',
                                 '<?php echo htmlspecialchars($book['author']); ?>',
                                 '<?php echo htmlspecialchars($book['book_genre']); ?>',
                                 '<?php echo $book['year_published']; ?>'
                             )">✏️ Editar</button>
-                            <button class="btn remove-btn" onclick="deleteBook(<?php echo $book['id']; ?>)">Borrar</button>
-                        </td>
+                                <button class="btn remove-btn" onclick="deleteBook(<?php echo $book['id']; ?>)">Borrar</button>
+                            </td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

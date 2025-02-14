@@ -19,7 +19,9 @@ $reviews = $reviewInstance->findAll();
                 <th>Título</th>
                 <th>Reseña</th>
                 <th>Fecha</th>
-                <th>Acciones</th>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <th>Acciones</th>
+                <?php endif; ?>
             </tr>
         </thead>
         <tbody id="reviewsTableBody">
@@ -30,16 +32,18 @@ $reviews = $reviewInstance->findAll();
                         <td><?php echo htmlspecialchars($review['book_title']); ?></td>
                         <td><?php echo htmlspecialchars($review['comment']); ?></td>
                         <td><?php echo htmlspecialchars($review['date']); ?></td>
-                        <td>
-                            <button class="btn edit-btn" onclick="showSection('createReview'), editReview(
+                        <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                            <td>
+                                <button class="btn edit-btn" onclick="showSection('createReview'), editReview(
                                         <?php echo $review['id']; ?>,
                                         '<?php echo $review['book_id']; ?>',
                                         '<?php echo $review['user_id']; ?>',
                                         '<?php echo htmlspecialchars($review['comment']); ?>',
                                         '<?php echo $review['date']; ?>'
                                     )">Editar</button>
-                            <button class="btn remove-btn" onclick="deleteReview(<?php echo $review['id']; ?>)">Borrar</button>
-                        </td>
+                                <button class="btn remove-btn" onclick="deleteReview(<?php echo $review['id']; ?>)">Borrar</button>
+                            </td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

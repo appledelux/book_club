@@ -18,7 +18,9 @@ $events = $eventInstance->findAll();
                 <th>Nombre</th>
                 <th>Fecha</th>
                 <th>Descripción</th>
-                <th>Acción</th>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <th>Acciones</th>
+                <?php endif; ?>
             </tr>
         </thead>
         <tbody id="eventsTableBody">
@@ -28,16 +30,19 @@ $events = $eventInstance->findAll();
                         <td><?php echo htmlspecialchars($event['title']); ?></td>
                         <td><?php echo htmlspecialchars($event['date']); ?></td>
                         <td><?php echo htmlspecialchars($event['description']); ?></td>
-                        <td>
-                            <button class="btn edit-btn" onclick="showSection('createEvent'), editEvent(
+                        <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                            <td>
+                                <button class="btn edit-btn" onclick="showSection('createEvent'), editEvent(
                                 <?php echo $event['id']; ?>,
                                 '<?php echo htmlspecialchars($event['title']); ?>',
                                 '<?php echo $event['date']; ?>',
                                 '<?php echo htmlspecialchars($event['description']); ?>'
                             )">Editar</button>
-                            <button class="btn remove-btn" id="deleteEvent"
-                                onclick="deleteEvent(<?php echo $event['id']; ?>)">Borrar</button>
-                        </td>
+                                <button class="btn remove-btn" id="deleteEvent"
+                                    onclick="deleteEvent(<?php echo $event['id']; ?>)">Borrar</button>
+                            </td>
+                        <?php endif; ?>
+
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

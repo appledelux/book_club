@@ -95,7 +95,7 @@ $username = $_SESSION['username'] ?? 'user';
   </div>
 
   <div class="content-user" id="mainContainer">
-    <h1>Hola <?php echo htmlspecialchars($username); ?>, Bienvenido al Club de Lectura, </h1>
+    <h1>Hola <?php echo htmlspecialchars($username); ?>, Bienvenido al Club de Lectura </h1>
     <img src="assets/club_lectura.webp" alt="Club de Lectura" width="300px" height="200px">
     <p>Comparte tu pasión por la lectura con otros lectores. ¿A qué estás esperando?</p>
     <hr>
