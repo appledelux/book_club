@@ -24,20 +24,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo json_encode($response);
     exit;
 } else if ($_SERVER['REQUEST_METHOD'] === "PUT") {
-    $data = json_decode(file_get_contents("php://input"), true);
+    $input = json_decode(file_get_contents("php://input"), true);
 
-    $id = filter_var($data['id'] ?? '', FILTER_VALIDATE_INT);
-    $id_book = filter_var($data['id_book'] ?? '', FILTER_VALIDATE_INT);
-    $id_user = filter_var($data['id_user'] ?? '', FILTER_VALIDATE_INT);
-    $comment = trim($data['review'] ?? '');
-    $date = date('Y-m-d H:i:s');
+    $id = isset($input['id']) ? intval($input['id']) : null;
+    $id_book = isset($input['id_book']) ? intval($input['id_book']) : null;
+    $id_user = isset($input['id_user']) ? intval($input['id_user']) : null;
+    $comment = trim($input['comment'] ?? '');
+    $date = $input['date'] ?? '';
+    $dateObj = DateTime::createFromFormat('Y-m-d', $date);
 
-    if (!$id || !$id_book || !$id_user || empty($comment)) {
+
+    if (!$id || !$id_book || !$id_user || empty($comment) || !$dateObj) {
         echo json_encode(["success" => false, "message" => "Todos los campos son obligatorios para actualizar."]);
         exit;
     }
+    $formattedDate = $dateObj->format('Y-m-d H:i:s');
 
-    $response = $review->update($id, $comment, $date, $id_book, $id_user);
+    $response = $review->update($id, $comment, $formattedDate, $id_book, $id_user);
     echo json_encode($response);
     exit;
 } else if ($_SERVER['REQUEST_METHOD'] === "DELETE") {

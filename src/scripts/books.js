@@ -52,6 +52,8 @@ function saveBook(event) {
             console.error("Error:", error);
             messageContainer.innerHTML = `<p style="color: red;">Error en la conexión con el servidor.</p>`;
             messageContainer.style.display = "block";
+        }).finally(() => {
+            clearTimeout();
         });
 }
 

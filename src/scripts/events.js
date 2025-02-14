@@ -50,7 +50,9 @@ function saveEvent() {
           console.error("Error:", error);
           eventMessageContainer.innerHTML = `<p style="color: red;">Error en la conexión con el servidor.</p>`;
           eventMessageContainer.style.display = "block";
-      });
+      }).finally(() => {
+        clearTimeout();
+    });
 }
 
 function deleteEvent(eventId) {

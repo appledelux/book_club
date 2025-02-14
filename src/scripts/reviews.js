@@ -78,7 +78,9 @@ function deleteReview(reviewId) {
       .catch(error => {
           console.error("Error:", error);
           alert("Error en la conexión con el servidor.");
-      });
+      }).finally(() => {
+        clearTimeout();
+    });
 }
 
 function editReview(id, id_book, id_user, comment, date) {

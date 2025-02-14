@@ -33,8 +33,8 @@ $reviews = $reviewInstance->findAll();
                         <td>
                             <button class="btn edit-btn" onclick="showSection('createReview'), editReview(
                                         <?php echo $review['id']; ?>,
-                                        '<?php echo $review['book_title']; ?>',
-                                        '<?php echo $review['user']; ?>',
+                                        '<?php echo $review['book_id']; ?>',
+                                        '<?php echo $review['user_id']; ?>',
                                         '<?php echo htmlspecialchars($review['comment']); ?>',
                                         '<?php echo $review['date']; ?>'
                                     )">Editar</button>
