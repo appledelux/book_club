@@ -82,10 +82,12 @@ function deleteBook(bookId) {
 }
 
 function editBook(id, title, author, book_genre, year_published) {
-  document.getElementById("bookId").value = id;
+    setTimeout(() => {
+        document.getElementById("bookId").value = id;
   document.getElementById("title").value = title;
   document.getElementById("author").value = author;
   document.getElementById("book_genre").value = book_genre;
   document.getElementById("year_published").value = year_published;
   document.getElementById("submitButton").textContent = "Actualizar libro";
+    }, 300);
 }

@@ -32,7 +32,7 @@ $books = $bookInstance->findAll();
                         <td><?php echo htmlspecialchars(string: $book['book_genre']); ?></td>
                         <td><?php echo htmlspecialchars(string: $book['year_published']); ?></td>
                         <td>
-                            <button class="btn edit-btn" onclick="editBook(
+                            <button class="btn edit-btn" onclick="showSection('createBook'), editBook(
                                 <?php echo $book['id']; ?>,
                                 '<?php echo htmlspecialchars($book['title']); ?>',
                                 '<?php echo htmlspecialchars($book['author']); ?>',

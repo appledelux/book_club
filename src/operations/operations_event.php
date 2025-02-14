@@ -27,19 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } elseif ($_SERVER['REQUEST_METHOD'] === "PUT") {
     $data = json_decode(file_get_contents("php://input"), true);
 
-    $id = filter_var($data['id'] ?? '', FILTER_VALIDATE_INT);
+    $id = isset($data['id']) ? intval($data['id']) : null;
     $title = trim($data['title'] ?? '');
     $date = $data['date'] ?? '';
     $description = trim($data['description'] ?? '');
-
-    $dateObj = DateTime::createFromFormat('Y-m-d H:i:s', $date);
+    $dateObj = DateTime::createFromFormat('Y-m-d', $date);
 
     if (!$id || empty($title) || !$dateObj || empty($description)) {
         echo json_encode(["success" => false, "message" => "Todos los campos son obligatorios y la fecha debe tener el formato correcto (YYYY-MM-DD HH:MM:SS)."]);
         exit;
     }
 
-    $response = $event->update($id, $title, $date, $description);
+    $formattedDate = $dateObj->format('Y-m-d H:i:s');
+
+
+    $response = $event->update($id, $title, $formattedDate, $description);
     echo json_encode($response);
     exit;
 

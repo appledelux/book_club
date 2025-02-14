@@ -29,7 +29,7 @@ $events = $eventInstance->findAll();
                         <td><?php echo htmlspecialchars($event['date']); ?></td>
                         <td><?php echo htmlspecialchars($event['description']); ?></td>
                         <td>
-                            <button class="btn edit-btn" onclick="editEvent(
+                            <button class="btn edit-btn" onclick="showSection('createEvent'), editEvent(
                                 <?php echo $event['id']; ?>,
                                 '<?php echo htmlspecialchars($event['title']); ?>',
                                 '<?php echo $event['date']; ?>',

@@ -82,10 +82,13 @@ function deleteReview(reviewId) {
 }
 
 function editReview(id, id_book, id_user, comment, date) {
+  setTimeout(() => {
   document.getElementById("reviewId").value = id;
   document.getElementById("id_book").value = id_book;
   document.getElementById("id_user").value = id_user;
   document.getElementById("comment").value = comment;
   document.getElementById("date").value = date;
   document.getElementById("submitButton").textContent = "Actualizar reseña";
+}, 300);
+
 }

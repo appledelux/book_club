@@ -79,11 +79,14 @@ function deleteEvent(eventId) {
 }
 
 function editEvent(id, title, date, description) {
+  setTimeout(() => {
   document.getElementById("eventId").value = id;
-  document.getElementById("title").value = title;
-  document.getElementById("date").value = date;
-  document.getElementById("description").value = description;
-  document.getElementById("submitButton").textContent = "Actualizar evento";
+  document.getElementById("eventTitle").value = title;
+  document.getElementById("eventDate").value = date;
+  document.getElementById("eventDescription").value = description;
+  document.getElementById("eventSubmitButton").textContent = "Actualizar evento";
+}, 300);
+
 }
 
 
